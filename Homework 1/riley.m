@@ -1,23 +1,23 @@
 % Read image and make it grayscale
-I0 = imread('cezanne 1.jpg');
-I0 = rgb2gray(I0);
-I1 = imread('ground truth 1.jpg');
-I1 = rgb2gray(I1);
+I1 = imread('cezanne 1.jpg');
+I1 = im2double(rgb2gray(I1));
+I0 = imread('ground truth 1.jpg');
+I0 = im2double(rgb2gray(I0));
 
-FT0 = fft2(I0);
-FT1 = fft2(I1);
+FT1 = fft2(fftshift(I1));
+FT0 = fft2(fftshift(I0));
 
-flt = FT0 ./ FT1;
+flt = FT1 ./ FT0;
 
 figure(1);
 imshow(flt);
 
-I0 = imread('cezanne 2.jpg');
-I0 = rgb2gray(I0);
-FT0 = fft2(I0);
-FT1 = FT0 ./ flt;
+I1 = imread('cezanne 2.jpg');
+I1 = im2double(rgb2gray(I1));
+FT1 = fft2(fftshift(I1));
+FT0 = FT1 ./ flt;
 
-I1 = ifft(FT1);
+I0 = ifftshift(ifft2(FT0));
 figure(2);
 
-imshow(uint8(I1));
+imshow(I0);
