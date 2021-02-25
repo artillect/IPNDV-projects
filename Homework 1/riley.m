@@ -42,11 +42,16 @@ flt4 = FTC4 ./ FTGT4;
 flt = (flt1 + flt2 + flt3 + flt4)/4;
 
 % Try to recreate original image
-IC1 = imread('cezanne 3.jpg');
-IC1 = im2double(rgb2gray(IC1));
-FTC1 = fft2(fftshift(IC1));
-FTGT1 = FTC1 ./ flt;
+IC = imread('cezanne 3.jpg');
+IC = im2double(rgb2gray(IC));
+FTC = fft2(fftshift(IC));
+% Calculate the prediction of what the real image looked like
+FTR = FTC ./ flt;
 
-IGT1 = ifftshift(ifft2(FTGT1));
+IR = ifftshift(ifft2(FTR));
 
-imshow(IGT1);
+figure(1);
+imshow(fft2(fftshift(IR)));
+
+figure(2);
+imshow(IR);
