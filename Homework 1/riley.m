@@ -4,8 +4,8 @@ IC1 = im2double(rgb2gray(IC1));
 IGT1 = imread('ground truth 1.jpg');
 IGT1 = im2double(rgb2gray(IGT1));
 
-figure(1);
-imshow(IC1);
+%figure(1);
+%imshow(IC1);
 
 IC2 = imread('cezanne 2.jpg');
 IC2 = im2double(rgb2gray(IC2));
@@ -26,8 +26,8 @@ IGT4 = im2double(rgb2gray(IGT4));
 FTC1 = fft2(fftshift(IC1));
 FTGT1 = fft2(fftshift(IGT1));
 
-figure(2);
-imshow(FTC1);
+%figure(2);
+%imshow(FTC1);
 
 FTC2 = fft2(fftshift(IC2));
 FTGT2 = fft2(fftshift(IGT2));
@@ -46,11 +46,11 @@ flt4 = FTC4 ./ FTGT4;
 
 % Take average of filters for a better result
 flt = (flt1 + flt2 + flt3 + flt4)/4;
-figure(3);
-imshow(flt);
+%figure(3);
+%imshow(flt);
 
 % Try to recreate original image
-IC = imread('cezanne 3.jpg');
+IC = imread('painting to reverse 2.jpg');
 IC = im2double(rgb2gray(IC));
 FTC = fft2(fftshift(IC));
 % Calculate the prediction of what the real image looked like
