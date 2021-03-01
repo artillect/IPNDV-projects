@@ -23,20 +23,20 @@ IGT4 = imread('ground truth 4.jpg');
 IGT4 = im2double(rgb2gray(IGT4));
 
 % Take 2d fourier transforms of images
-FTC1 = fft2(fftshift(IC1));
-FTGT1 = fft2(fftshift(IGT1));
+FTC1 = fft2(IC1);
+FTGT1 = fft2(IGT1);
 
 %figure(2);
 %imshow(FTC1);
 
-FTC2 = fft2(fftshift(IC2));
-FTGT2 = fft2(fftshift(IGT2));
+FTC2 = fft2(IC2);
+FTGT2 = fft2(IGT2);
 
-FTC3 = fft2(fftshift(IC3));
-FTGT3 = fft2(fftshift(IGT3));
+FTC3 = fft2(IC3);
+FTGT3 = fft2(IGT3);
 
-FTC4 = fft2(fftshift(IC4));
-FTGT4 = fft2(fftshift(IGT4));
+FTC4 = fft2(IC4);
+FTGT4 = fft2(IGT4);
 
 % Determine filter for each image
 flt1 = FTC1 ./ FTGT1;
@@ -52,14 +52,17 @@ flt = (flt1 + flt2 + flt3 + flt4)/4;
 % Try to recreate original image
 IC = imread('painting to reverse 2.jpg');
 IC = im2double(rgb2gray(IC));
-FTC = fft2(fftshift(IC));
+FTC = fft2(IC);
 % Calculate the prediction of what the real image looked like
 FTR = FTC ./ flt;
 
-IR = ifftshift(ifft2(FTR));
+
+IR = ifft2(FTR);
 
 figure(4);
-imshow(fft2(fftshift(IR)));
+imagesc(abs(fft2(IR)));
 
 figure(5);
 imshow(IR);
+
+imwrite(IR, 'reversed painting.jpg');
