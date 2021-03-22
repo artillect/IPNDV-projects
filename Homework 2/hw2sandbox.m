@@ -7,23 +7,24 @@ temp = zeros(1024, 1024, 'uint8'); %for manipulating
 
 angles = linspace(0, 2*pi, 500); %don't need this in the loop, won't change
 succDrawn = 0;
+n = 64; %NUMBER OF CIRCLES
 
 %until we have drawn [16] circles
-while succDrawn < 32
+while succDrawn < n
     
     
     badCenters = true;
     while badCenters == true
         %random x centers
-        centerx = randi([40,984], 1, 32); 
+        centerx = randi([40,984], 1, n); 
         %random y centers
-        centery = randi([40,984], 1, 32);
+        centery = randi([40,984], 1, n);
         
         %check spacing of centers to ensure no concentric circles
         badCenters = false;
         d = 100000;
-        for i=1:1:32
-           for j=1:1:32
+        for i=1:1:n
+           for j=1:1:n
                if i ~= j
                    d = sqrt((centerx(j)-centerx(i))^2 + (centery(j)-centery(i))^2);
                end
@@ -42,7 +43,7 @@ while succDrawn < 32
 
 
     
-    for i = 1:1:32 %for each center
+    for i = 1:1:n %for each center
        %attempt to draw circle
        x = centerx(i);
        y = centery(i);
@@ -74,7 +75,7 @@ while succDrawn < 32
        end
        
        
-       if (succDrawn == 32)
+       if (succDrawn == n)
            break
        end
     end
