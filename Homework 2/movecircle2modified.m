@@ -7,8 +7,6 @@ vel = 32; % 4, 8, or 32 pixels/frame
 min_corr = 0.7;
 SNR = 20;
 
-im = 1/SNR * rand(1024, 1024);
-
 x_array = randi([1 1024], num_obs, 1);
 y_array = randi([1 1024], num_obs, 1);
 r_array = 5 * rand(num_obs, 1);
@@ -21,7 +19,7 @@ v.FrameRate = frameRate;
 open(v)
 
 for frameNo = 1 : frameRate * movieLength
-    im = 1/SNR * rand(1024, 1024);
+    im = 1/SNR * rand(1024, 1024); % generate background with noise with given SNR
 
     for i = 1 : num_obs
         x_coord = x_array(i);
