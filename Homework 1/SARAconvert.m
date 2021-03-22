@@ -119,3 +119,5 @@ elseif cezanneNumber >= 5
     imshow(IR);
     title('Filtered Painting', 'FontSize',14)
 end
+
+imwrite(IR, 'reversed painting.jpg');
