@@ -24,22 +24,29 @@ for frameNo = 1 : frameRate * movieLength
     for i = 1 : num_obs
         x_coord = x_array(i);
         y_coord = y_array(i);
-        im(x_coord, y_coord) = 1;
+        radius = r_array(i);
         
+        for x = round(x_coord - radius) : round(x_coord + radius)
+            for y = round(y_coord - radius) : round(y_coord + radius)
+                if sqrt((x-x_coord)^2+(y-y_coord)^2) < radius && x < 1024 && x  > 1 && y < 1024 && y > 0
+                    im(x,y) = 1;
+                end
+            end
+        end
         rand_angle = 2 * pi * rand(1);
-        x_coord = x_coord + round(vel * cos(rand_angle));
-        y_coord = y_coord + round(vel * sin(rand_angle));
+        x_coord = x_coord + vel * cos(rand_angle);
+        y_coord = y_coord + vel * sin(rand_angle);
         
-        if x_coord <= 0
-            x_coord = x_coord + 1024;
-        elseif x_coord > 1024
-            x_coord = x_coord - 1024;
+        if round(x_coord) <= 1
+            x_coord = x_coord + 1023;
+        elseif round(x_coord) > 1024
+            x_coord = x_coord - 1023;
         end
         
-        if y_coord <= 0
-            y_coord = y_coord + 1024;
-        elseif y_coord > 1024
-            y_coord = y_coord - 1024;
+        if round(y_coord) <= 1
+            y_coord = y_coord + 1023;
+        elseif round(y_coord) > 1024
+            y_coord = y_coord - 1023;
         end
         
         x_array(i) = x_coord;
