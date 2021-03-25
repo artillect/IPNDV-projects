@@ -1,4 +1,9 @@
-% Arrays of input parameters for random particle motion movies
+% generateAllMovies is a helper script for the function
+% generateMovingParticlesMovie()
+% It generates random particle motion movies given parameters in the arrays
+% below
+
+% Arrays of input parameters for movies
 num_particles = [64, 128, 256];
 vel = [4, 8, 32];
 SNR = [20, 2];
