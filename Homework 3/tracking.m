@@ -47,6 +47,9 @@ particleCoords = zeros(0, 4);
 for frame = 1:100
     IJ.setSlice(frame);
     % Auto threshold
+    % Otsu works best for Team SARA's data
+    % Intermodes works best for Fiji Water's data
+    % Minimum works best for Rugrats' data
     IJ.run("Auto Threshold", "method=Minimum white");
     
     % Find positions of particles 
