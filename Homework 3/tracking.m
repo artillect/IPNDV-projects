@@ -71,7 +71,7 @@ for frame = 1:100
 
             if frame == 1 % Give particles trajectory IDs in first frame
                 coords(particleID, :) = [particleID 1 xm ym];
-                particleCoords = [particleCoords; particleID frame * timestep xm ym];
+                particleCoords = [particleCoords; particleID frame xm ym];
             else
                 trajectoryID = 0;
                 
@@ -104,7 +104,7 @@ for frame = 1:100
                 % Add coordinates of this particle to array for next loop
                 % and output array
                 coords(particleID, :) = [trajectoryID frame xm ym];
-                particleCoords = [particleCoords; trajectoryID frame * timestep xm ym];
+                particleCoords = [particleCoords; trajectoryID frame xm ym];
             end
         end
     end
@@ -114,14 +114,6 @@ for frame = 1:100
     else
         % Carry unmatched particles over to next iteration of loop
         lastCoords = [lastCoords; coords];
-    end
-end
-
-for i = 1:size(lastCoords)
-    ID = lastCoords(i, 1);
-    frameLastSeen = lastCoords(i, 2);
-    if frameLastSeen ~= frame
-        disp("Lost track of particle " + lastCoords(i, 1) + " in frame " + lastCoords(i, 2));
     end
 end
 
